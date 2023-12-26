@@ -71,10 +71,22 @@
     .logout a:hover {
       background-color: #c0392b;
     }
+    .logo-container {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .logo {
+      max-height: 4rem;
+      width: auto;
+    }
   </style>
   
   <header>
-    <h1>Object Tracking Dashboard</h1>
+  <div class="logo-container">
+  <%= image_tag("logo.png", alt: "Your Logo", class: "logo") %>
+</div>
+    <h1>Ring Game</h1>
     <div class="logout">
     <%= form_tag destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to log out?" } do %>
       <%= button_tag "Logout" %>
@@ -101,22 +113,30 @@
         <table>
           <thead>
             <tr>
-              <th>Name/Identifier</th>
+              <th>Game</th>
+              <th>Shorts Available</th>
               <th>Successful Passes</th>
               <th>Missed Attempts</th>
               <th>Success Rate</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Populate the table with data from the backend -->
+          <% current_user.games.each do |game| %>
             <tr>
-              <td>John Doe</td>
-              <td>25</td>
-              <td>5</td>
-              <td>83%</td>
+              <td><%= game.game_name %></td>
+              <td><%= game.no_of_shots %></td>
+              <td><%= game.shorts.where(result: true).count %></td>
+              <td><%= game.shorts.where(result: false).count %></td>
+              <td>
+                <% if game.shorts.any? %>
+                  <%= number_to_percentage((game.shorts.where(result: true).count.to_f / game.shorts.count) * 100, precision: 2) %>
+                <% else %>
+                  0%
+                <% end %>
+              </td>
             </tr>
-            <!-- Add more rows as needed -->
-          </tbody>
+          <% end %>
+        </tbody>
         </table>
       </div>
     </section>

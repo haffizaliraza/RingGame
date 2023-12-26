@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @short %>
+
+<div>
+  <%= link_to "Edit this short", edit_short_path(@short) %> |
+  <%= link_to "Back to shorts", shorts_path %>
+
+  <%= button_to "Destroy this short", @short, method: :delete %>
+</div>

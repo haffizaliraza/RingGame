@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Shorts</h1>
+
+<div id="shorts">
+  <% @shorts.each do |short| %>
+    <%= render short %>
+    <p>
+      <%= link_to "Show this short", short %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New short", new_short_path %>

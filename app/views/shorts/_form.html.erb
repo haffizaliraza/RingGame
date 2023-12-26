@@ -1,0 +1,27 @@
+<%= form_with(model: short) do |form| %>
+  <% if short.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(short.errors.count, "error") %> prohibited this short from being saved:</h2>
+
+      <ul>
+        <% short.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :game_id, style: "display: block" %>
+    <%= form.text_field :game_id %>
+  </div>
+
+  <div>
+    <%= form.label :result, style: "display: block" %>
+    <%= form.check_box :result %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
