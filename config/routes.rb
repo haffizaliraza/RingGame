@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
+  get 'dashboard/index'
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  authenticated :user do
+    root to: 'dashboard#index', as: :authenticated_root
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-  # devise_for :users, controllers: { registrations: 'registrations' }
-
+  root to: 'welcome#index'
 end
