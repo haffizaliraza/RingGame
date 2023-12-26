@@ -1,4 +1,123 @@
-<h1>Welcome to Your Dashboard, <%= current_user.first_name %>, <%= current_user.last_name %></h1>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
 
-<%= link_to "Logout", destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center", data: { confirm: "Are you sure you want to log out?" } %>
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
 
+    main {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+
+    section {
+      flex: 1;
+      background-color: #ecf0f1;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .results {
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .logout {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .logout a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 10px;
+      background-color: #e74c3c;
+      border-radius: 4px;
+    }
+
+    .logout a:hover {
+      background-color: #c0392b;
+    }
+  </style>
+  
+  <header>
+    <h1>Object Tracking Dashboard</h1>
+    <div class="logout">
+    <%= form_tag destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to log out?" } do %>
+      <%= button_tag "Logout" %>
+    <% end %>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>Purchase Options</h2>
+      <!-- Purchase options content goes here -->
+      <p>Choose your game and make a purchase to participate.</p>
+      <!-- Add your purchase options and payment form here -->
+      <form>
+        <!-- Purchase form goes here -->
+        <button type="submit">Purchase</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Results</h2>
+      <div class="results">
+        <!-- Display cumulative results here -->
+        <table>
+          <thead>
+            <tr>
+              <th>Name/Identifier</th>
+              <th>Successful Passes</th>
+              <th>Missed Attempts</th>
+              <th>Success Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populate the table with data from the backend -->
+            <tr>
+              <td>John Doe</td>
+              <td>25</td>
+              <td>5</td>
+              <td>83%</td>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
