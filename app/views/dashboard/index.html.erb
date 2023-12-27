@@ -1,98 +1,105 @@
-<style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
-    .start-game-button {
-      background-color: #3498db;
-      color: #fff;
-      padding: 8px 12px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+# <style>
+#     body {
+#       font-family: Arial, sans-serif;
+#       margin: 0;
+#       padding: 0;
+#       background-color: #f4f4f4;
+#     }
+#     .start-game-button {
+#       background-color: #3498db;
+#       color: #fff;
+#       padding: 8px 12px;
+#       border: none;
+#       border-radius: 4px;
+#       cursor: pointer;
+#     }
   
-    .start-game-button:hover {
-      background-color: #2980b9;
-    }
-    header {
-      background-color: #333;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
+#     .start-game-button:hover {
+#       background-color: #2980b9;
+#     }
+#     header {
+#       background-color: #333;
+#       color: #fff;
+#       padding: 1rem;
+#       text-align: center;
+#     }
 
-    main {
-      display: flex;
-      justify-content: space-around;
-      padding: 20px;
-    }
+#     main {
+#       display: flex;
+#       justify-content: space-around;
+#       padding: 20px;
+#     }
 
-    section {
-      flex: 1;
-      background-color: #ecf0f1;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
+#     section {
+#       flex: 1;
+#       background-color: #ecf0f1;
+#       padding: 20px;
+#       border-radius: 8px;
+#       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+#     }
 
-    h2 {
-      margin-bottom: 20px;
-    }
+#     h2 {
+#       margin-bottom: 20px;
+#     }
 
-    .results {
-      margin-top: 20px;
-    }
+#     .results {
+#       margin-top: 20px;
+#     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-    }
+#     table {
+#       width: 100%;
+#       border-collapse: collapse;
+#       margin-top: 10px;
+#     }
 
-    table, th, td {
-      border: 1px solid #ddd;
-    }
+#     table, th, td {
+#       border: 1px solid #ddd;
+#     }
 
-    th, td {
-      padding: 10px;
-      text-align: left;
-    }
+#     th, td {
+#       padding: 10px;
+#       text-align: left;
+#     }
 
-    th {
-      background-color: #333;
-      color: #fff;
-    }
+#     th {
+#       background-color: #333;
+#       color: #fff;
+#     }
 
-    .logout {
-      text-align: right;
-      margin-top: 10px;
-    }
+#     .logout {
+#       text-align: right;
+#       margin-top: 10px;
+#     }
 
-    .logout a {
-      color: #fff;
-      text-decoration: none;
-      padding: 5px 10px;
-      background-color: #e74c3c;
-      border-radius: 4px;
-    }
+#     .logout a {
+#       color: #fff;
+#       text-decoration: none;
+#       padding: 5px 10px;
+#       background-color: #e74c3c;
+#       border-radius: 4px;
+#     }
 
-    .logout a:hover {
-      background-color: #c0392b;
-    }
-    .logo-container {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+#     .logout a:hover {
+#       background-color: #c0392b;
+#     }
+#     .logo-container {
+#       margin-bottom: 2rem;
+#       text-align: center;
+#     }
 
-    .logo {
-      max-height: 4rem;
-      width: auto;
-    }
-  </style>
+#     .logo {
+#       max-height: 4rem;
+#       width: auto;
+#     }
+#   </style>
   
+
+<div class="dashboard-top">
+  <%= render partial: 'shared/navbar' %>
+  <h1>Welcome to the Dashboard</h1>
+</div>
+
+
   <header>
   <div class="logo-container">
   <%= image_tag("logo.png", alt: "Your Logo", class: "logo") %>
