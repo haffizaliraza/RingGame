@@ -2,6 +2,12 @@
 
 <h1>Shorts</h1>
 
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger" style="padding: 10px; border: 1px solid #d9534f; background-color: #f2dede; color: #a94442;">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <div id="shorts">
   <% @shorts.each do |short| %>
     <%= render short %>

@@ -1,17 +1,49 @@
+<style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #333;
+    color: #fff;
+  }
+
+  #<%= dom_id(game) %> {
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  #<%= dom_id(game) %> p {
+    margin: 0;
+    padding: 10px;
+  }
+</style>
+
 <div id="<%= dom_id game %>">
-  <p>
-    <strong>User:</strong>
-    <%= game.user_id %>
-  </p>
-
-  <p>
-    <strong>No of shots:</strong>
-    <%= game.no_of_shots %>
-  </p>
-
-  <p>
-    <strong>Game name:</strong>
-    <%= game.game_name %>
-  </p>
-
+  <table>
+    <tr>
+      <th colspan="2">Game Information</th>
+    </tr>
+    <tr>
+      <td><strong>User:</strong></td>
+      <td><%= game.user.first_name %></td>
+    </tr>
+    <tr>
+      <td><strong>No of shots:</strong></td>
+      <td><%= game.no_of_shots %></td>
+    </tr>
+    <tr>
+      <td><strong>Game name:</strong></td>
+      <td><%= game.game_name %></td>
+    </tr>
+  </table>
 </div>

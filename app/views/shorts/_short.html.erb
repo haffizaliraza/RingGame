@@ -1,12 +1,29 @@
-<div id="<%= dom_id short %>">
-  <p>
-    <strong>Game:</strong>
-    <%= short.game_id %>
-  </p>
+<style>
+.shorts-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
 
-  <p>
-    <strong>Result:</strong>
-    <%= short.result %>
-  </p>
+.shorts-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
 
-</div>
+.shorts-table strong {
+  font-weight: bold;
+  color: #333;
+}
+</style>
+<table class="shorts-table">
+  <tr>
+    <td>
+      <strong>Game:</strong>
+      <%= short.game_id %>
+    </td>
+    <td>
+      <strong>Result:</strong>
+      <%= short.result %>
+    </td>
+  </tr>
+</table>

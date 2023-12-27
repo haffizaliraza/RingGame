@@ -1,32 +1,88 @@
-<%= form_with(model: game) do |form| %>
-  <% if game.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
 
-      <ul>
-        <% game.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+  .form-container {
+   
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .error-message {
+    color: red;
+    margin-bottom: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+
+  .form-control {
+    # width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  .btn-primary {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background-color: #2980b9;
+  }
+</style>
+
+<div class="form-container">
+  <%= form_with(model: game) do |form| %>
+    <% if game.errors.any? %>
+      <div class="error-message">
+        <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+        <ul>
+          <% game.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :no_of_shots %>
+      <%= form.number_field :no_of_shots, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :game_name %>
+      <%= form.text_field :game_name, class: "form-control" %>
+    </div>
+
+    <div class="field">
+    <%= form.label :status %>
+    <%= form.select :status, Game.statuses.keys.map { |status| [status.humanize, status] }, {}, class: 'form-control' %>
+  </div>
+
+    <div class="form-group">
+      <%= form.submit class: "btn btn-primary" %>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :no_of_shots, style: "display: block" %>
-    <%= form.number_field :no_of_shots %>
-  </div>
-
-  <div>
-    <%= form.label :game_name, style: "display: block" %>
-    <%= form.text_field :game_name %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>

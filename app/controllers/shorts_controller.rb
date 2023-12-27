@@ -22,16 +22,23 @@ class ShortsController < ApplicationController
 
   # POST /shorts or /shorts.json
   def create
-    @short = Short.new(short_params)
-
-    respond_to do |format|
-      if @short.save
-        format.html { redirect_to short_url(@short), notice: "Short was successfully created." }
-        format.json { render :show, status: :created, location: @short }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @short.errors, status: :unprocessable_entity }
+    game = Game.find_by(status: :in_progress, id: short_params[:game_id])
+    if game && game.id != short_params[:game_id]
+      @short = Short.new(short_params)
+      respond_to do |format|
+        if @short.save
+          update_status(game)
+          format.html { redirect_to short_url(@short), notice: "Short was successfully created." }
+          format.json { render :show, status: :created, location: @short }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @short.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      flash[:alert] = "A game is already in progress"
+      redirect_to shorts_path # Adjust the redirection path as needed
+      return
     end
   end
 
@@ -68,4 +75,17 @@ class ShortsController < ApplicationController
     def short_params
       params.require(:short).permit(:game_id, :result)
     end
+
+    def update_status(game)
+      if game.shorts.any? && game.shorts.where(result: false).count < game.no_of_shots
+        game.status = :in_progress
+      elsif game.shorts.any? && game.shorts.where(result: false).count == game.no_of_shots
+        game.status = :completed
+      else
+        game.status = :initiated
+      end
+      game.save
+    end
+
+  
 end
