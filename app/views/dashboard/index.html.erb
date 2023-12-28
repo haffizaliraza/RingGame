@@ -1,130 +1,182 @@
-# <style>
-#     body {
-#       font-family: Arial, sans-serif;
-#       margin: 0;
-#       padding: 0;
-#       background-color: #f4f4f4;
-#     }
-#     .start-game-button {
-#       background-color: #3498db;
-#       color: #fff;
-#       padding: 8px 12px;
-#       border: none;
-#       border-radius: 4px;
-#       cursor: pointer;
-#     }
-  
-#     .start-game-button:hover {
-#       background-color: #2980b9;
-#     }
-#     header {
-#       background-color: #333;
-#       color: #fff;
-#       padding: 1rem;
-#       text-align: center;
-#     }
-
-#     main {
-#       display: flex;
-#       justify-content: space-around;
-#       padding: 20px;
-#     }
-
-#     section {
-#       flex: 1;
-#       background-color: #ecf0f1;
-#       padding: 20px;
-#       border-radius: 8px;
-#       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-#     }
-
-#     h2 {
-#       margin-bottom: 20px;
-#     }
-
-#     .results {
-#       margin-top: 20px;
-#     }
-
-#     table {
-#       width: 100%;
-#       border-collapse: collapse;
-#       margin-top: 10px;
-#     }
-
-#     table, th, td {
-#       border: 1px solid #ddd;
-#     }
-
-#     th, td {
-#       padding: 10px;
-#       text-align: left;
-#     }
-
-#     th {
-#       background-color: #333;
-#       color: #fff;
-#     }
-
-#     .logout {
-#       text-align: right;
-#       margin-top: 10px;
-#     }
-
-#     .logout a {
-#       color: #fff;
-#       text-decoration: none;
-#       padding: 5px 10px;
-#       background-color: #e74c3c;
-#       border-radius: 4px;
-#     }
-
-#     .logout a:hover {
-#       background-color: #c0392b;
-#     }
-#     .logo-container {
-#       margin-bottom: 2rem;
-#       text-align: center;
-#     }
-
-#     .logo {
-#       max-height: 4rem;
-#       width: auto;
-#     }
-#   </style>
-  
 
 <div class="dashboard-top">
   <%= render partial: 'shared/navbar' %>
-  <h1>Welcome to the Dashboard</h1>
 </div>
 
 
-  <header>
-  <div class="logo-container">
-  <%= image_tag("logo.png", alt: "Your Logo", class: "logo") %>
-</div>
-    <h1>Ring Game</h1>
-    <div class="logout">
-    <%= form_tag destroy_user_session_path, method: :delete, data: { confirm: "Are you sure you want to log out?" } do %>
-      <%= button_tag "Logout" %>
-    <% end %>
+
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto  ">
+    <div class="flex flex-wrap -mx-4 -mb-10  ">
+      <div class="sm:w-1/2 mb-10 px-4">
+        <div class="rounded-lg h-96 overflow-hidden border">
+        
+        <div class="max-w-md  bg-white p-3 rounded-md ">
+
+        <!-- Heading -->
+        <h2 class="text-2xl font-bold mb-4">Your Heading Here</h2>
+    
+        <!-- Paragraph -->
+        <p class="text-gray-600 mb-4">Your paragraph content goes here. Customize </p>
+    
+        <!-- Buttons -->
+        <div class="flex space-x-2">
+          <button class="bg-green-500 text-white px-4 py-0 rounded-md hover:bg-green-600  focus:outline-none focus:ring focus:border-green-300">Button 1</button>
+          <button class="bg-blue-500  text-white px-8 py-1 rounded-md hover:bg-blue-600  focus:outline-none focus:ring focus:border-blue-300 ">Button 2</button>
+        </div>
+    
+      </div>
+
+        </div>
+      </div>
+      <div class="sm:w-1/2 mb-10 px-4">
+        <div class="rounded-lg h-96 overflow-hidden border">
+
+        
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg border top-2.5">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        Product name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Color
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Category
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Category
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Price
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+                    </tr>
+            </thead>
+            <tbody>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Apple MacBook Pro 17"
+                    </th>
+                    <td class="px-6 py-4">
+                        Silver
+                    </td>
+                    <td class="px-6 py-4">
+                        Laptop
+                    </td>
+                    <td class="px-6 py-4">
+                        $2999
+                    </td>
+                      <td class="px-6 py-4">
+                          $2999
+                      </td>
+                    <td class="px-6 py-4">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Microsoft Surface Pro
+                    </th>
+                    <td class="px-6 py-4">
+                        White
+                    </td>
+                    <td class="px-6 py-4">
+                        Laptop PC
+                    </td>
+                    <td class="px-6 py-4">
+                        $1999
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Magic Mouse 2
+                    </th>
+                    <td class="px-6 py-4">
+                        Black
+                    </td>
+                    <td class="px-6 py-4">
+                        Accessories
+                    </td>
+                    <td class="px-6 py-4">
+                        $99
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Google Pixel Phone
+                    </th>
+                    <td class="px-6 py-4">
+                        Gray
+                    </td>
+                    <td class="px-6 py-4">
+                        Phone
+                    </td>
+                    <td class="px-6 py-4">
+                        $799
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Google Pixel Phone
+                    </th>
+                    <td class="px-6 py-4">
+                        Gray
+                    </td>
+                    <td class="px-6 py-4">
+                        Phone
+                    </td>
+                    <td class="px-6 py-4">
+                        $799
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        Apple Watch 5
+                    </th>
+                    <td class="px-6 py-4">
+                        Red
+                    </td>
+                    <td class="px-6 py-4">
+                        Wearables
+                    </td>
+                    <td class="px-6 py-4">
+                        $999
+                    </td>
+                    <td class="px-6 py-4">
+                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-  </header>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <main>
-    <section>
-      <h2>Purchase Options</h2>
-      <!-- Purchase options content goes here -->
-      <p>Choose your game and make a purchase to participate.</p>
-      <!-- Add your purchase options and payment form here -->
-      <form>
-        <!-- Purchase form goes here -->
-        <button type="submit">Purchase</button>
-        <%= link_to "Start New Game", new_game_path, class: "start-game-button" %>
 
-      </form>
-    </section>
+
 
     <section>
       <h2>Results</h2>
@@ -155,17 +207,13 @@
                   0%
                 <% end %>
               </td>
-            
               <td>
               <%= game.status %>
-
             </td>
-
-
             </tr>
           <% end %>
         </tbody>
         </table>
       </div>
     </section>
-  </main>
+
