@@ -1,219 +1,80 @@
-
 <div class="dashboard-top">
   <%= render partial: 'shared/navbar' %>
 </div>
-
-
-
-
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto  ">
     <div class="flex flex-wrap -mx-4 -mb-10  ">
-      <div class="sm:w-1/2 mb-10 px-4">
+      <div class="sm:w-1/4 mb-10 px-4">
         <div class="rounded-lg h-96 overflow-hidden border">
         
         <div class="max-w-md  bg-white p-3 rounded-md ">
 
         <!-- Heading -->
-        <h2 class="text-2xl font-bold mb-4">Your Heading Here</h2>
+        <h2 class="text-2xl font-bold mb-4">Purchase Options</h2>
     
         <!-- Paragraph -->
-        <p class="text-gray-600 mb-4">Your paragraph content goes here. Customize </p>
+        <p class="text-gray-600 mb-4">Choose your game and make a purchase to participate. </p>
     
         <!-- Buttons -->
         <div class="flex space-x-2">
-          <button class="bg-green-500 text-white px-4 py-0 rounded-md hover:bg-green-600  focus:outline-none focus:ring focus:border-green-300">Button 1</button>
-          <button class="bg-blue-500  text-white px-8 py-1 rounded-md hover:bg-blue-600  focus:outline-none focus:ring focus:border-blue-300 ">Button 2</button>
-        </div>
-    
-      </div>
-
+          <button class="bg-green-500 text-white px-4 py-0 rounded-md hover:bg-green-600  focus:outline-none focus:ring focus:border-green-300">Start Game</button>
+          <button class="bg-blue-500  text-white px-8 py-1 rounded-md hover:bg-blue-600  focus:outline-none focus:ring focus:border-blue-300 ">Purchase</button>
         </div>
       </div>
-      <div class="sm:w-1/2 mb-10 px-4">
+        </div>
+      </div>
+      <div class="sm:w-3/4 mb-10 px-4">
         <div class="rounded-lg h-96 overflow-hidden border">
-
-        
-
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg border top-2.5">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Product name
-                    </th>
+                    Game</th>
                     <th scope="col" class="px-6 py-3">
-                        Color
-                    </th>
+                    Shorts Available</th>
                     <th scope="col" class="px-6 py-3">
-                        Category
-                    </th>
+                    Successful Passes</th>
                     <th scope="col" class="px-6 py-3">
-                        Category
-                    </th>
+                    Missed Attempts</th>
                     <th scope="col" class="px-6 py-3">
-                        Price
-                    </th>
+                    Success Rate</th>
                     <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
+                    Game Status</th>
                     </tr>
             </thead>
             <tbody>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple MacBook Pro 17"
-                    </th>
-                    <td class="px-6 py-4">
-                        Silver
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop
-                    </td>
-                    <td class="px-6 py-4">
-                        $2999
-                    </td>
-                      <td class="px-6 py-4">
-                          $2999
-                      </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Microsoft Surface Pro
-                    </th>
-                    <td class="px-6 py-4">
-                        White
-                    </td>
-                    <td class="px-6 py-4">
-                        Laptop PC
-                    </td>
-                    <td class="px-6 py-4">
-                        $1999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Magic Mouse 2
-                    </th>
-                    <td class="px-6 py-4">
-                        Black
-                    </td>
-                    <td class="px-6 py-4">
-                        Accessories
-                    </td>
-                    <td class="px-6 py-4">
-                        $99
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Google Pixel Phone
-                    </th>
-                    <td class="px-6 py-4">
-                        Gray
-                    </td>
-                    <td class="px-6 py-4">
-                        Phone
-                    </td>
-                    <td class="px-6 py-4">
-                        $799
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Google Pixel Phone
-                    </th>
-                    <td class="px-6 py-4">
-                        Gray
-                    </td>
-                    <td class="px-6 py-4">
-                        Phone
-                    </td>
-                    <td class="px-6 py-4">
-                        $799
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        Apple Watch 5
-                    </th>
-                    <td class="px-6 py-4">
-                        Red
-                    </td>
-                    <td class="px-6 py-4">
-                        Wearables
-                    </td>
-                    <td class="px-6 py-4">
-                        $999
-                    </td>
-                    <td class="px-6 py-4">
-                        <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                    </td>
-                </tr>
-            </tbody>
+            <% current_user.games.each do |game| %>
+              <tr class="<%= cycle('odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800', 'dark:bg-gray-800 dark:even:bg-gray-900 dark:odd:bg-gray-900 dark:even:bg-gray-800') %> border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <%= game.game_name %>
+                </th>
+                <td class="px-6 py-4">
+                  <%= game.no_of_shots %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.shorts.where(result: true).count %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.shorts.where(result: false).count %>
+                </td>
+                <td class="px-6 py-4">
+                  <% if game.shorts.any? %>
+                    <%= number_to_percentage((game.shorts.where(result: true).count.to_f / game.shorts.count) * 100, precision: 2) %>
+                  <% else %>
+                    0%
+                  <% end %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.status %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
         </table>
     </div>
-    
         </div>
       </div>
     </div>
   </div>
 </section>
-
-
-
-
-    <section>
-      <h2>Results</h2>
-      <div class="results">
-        <!-- Display cumulative results here -->
-        <table>
-          <thead>
-            <tr>
-              <th>Game</th>
-              <th>Shorts Available</th>
-              <th>Successful Passes</th>
-              <th>Missed Attempts</th>
-              <th>Success Rate</th>
-              <th>Game Status</th>
-            </tr>
-          </thead>
-          <tbody>
-          <% current_user.games.each do |game| %>
-            <tr>
-              <td><%= game.game_name %></td>
-              <td><%= game.no_of_shots %></td>
-              <td><%= game.shorts.where(result: true).count %></td>
-              <td><%= game.shorts.where(result: false).count %></td>
-              <td>
-                <% if game.shorts.any? %>
-                  <%= number_to_percentage((game.shorts.where(result: true).count.to_f / game.shorts.count) * 100, precision: 2) %>
-                <% else %>
-                  0%
-                <% end %>
-              </td>
-              <td>
-              <%= game.status %>
-            </td>
-            </tr>
-          <% end %>
-        </tbody>
-        </table>
-      </div>
-    </section>
-
