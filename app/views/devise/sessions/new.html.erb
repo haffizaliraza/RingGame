@@ -1,67 +1,77 @@
-<style>
-    body {
-      display: flex;
-      min-height: 100vh;
-      align-items: center;
-      justify-content: center;
-      background-color: #f3f4f6;
-      margin: 0;
-    }
 
-    .container {
-      max-width: 24rem;
-      width: 100%;
-      padding: 1.5rem;
-      background-color: #ffffff;
-      border-radius: 0.375rem;
-      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    }
+<div class="bg-gray-100 flex items-center justify-center h-screen">
 
-    .logo-container {
-      margin-bottom: 2rem;
-      text-align: center;
-    }
+  <div class="bg-white p-8 rounded-md shadow-md max-w-md w-full">
 
-    .logo {
-      max-height: 4rem;
-      width: auto;
-    }
+    <div class="flex items-center justify-center mb-8">
+      <%= image_tag("logo.png", alt: "Your Logo", class: "h-32 w-32 mr-2") %>
+    </div>
 
-    .form-container {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-    }
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form"}) do |f| %>
 
-    .input-field {
-      width: 100%;
-      padding: 0.75rem;
-      margin-bottom: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 0.25rem;
-      box-sizing: border-box;
-    }
+      <div class="mb-4">
+        <%= f.label :email, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 input-field", required: true %>
+      </div>
 
-    .remember-me-container {
-      display: flex;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
+      <div class="mb-4">
+        <%= f.label :password, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.password_field :password, autocomplete: "current-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 input-field", required: true %>
+      </div>
 
-    .btn-primary {
-      background-color: #4caf50;
-      color: #fff;
-      padding: 1rem;
-      border: none;
-      border-radius: 0.25rem;
-      cursor: pointer;
-      font-size: 16px;
-    }
+      <% if devise_mapping.rememberable? %>
+        <div class="flex items-center justify-between mb-4">
+          <%= f.check_box :remember_me, class: "text-blue-500 focus:ring-blue-500" %>
+          <%= f.label :remember_me, class: "text-gray-600 ml-2" %>
+        </div>
+      <% end %>
 
-    .btn-primary:hover {
-      background-color: #45a049;
-    }
-  </style>
+      <div>
+        <%= f.submit "Log in", class: "w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300" %>
+      </div>
+
+    <% end %>
+
+    <div class="mt-4 text-center">
+      <span class="text-gray-600">Don't have an account?</span>
+      <%= link_to 'Sign up', new_user_registration_path, class: "text-blue-500 ml-1" %>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div class="container">
 
     <!-- Logo -->
@@ -74,13 +84,13 @@
 
       <!-- Email Field -->
       <div>
-        <%= f.label :email, class: "block text-sm font-medium leading-6 text-gray-900", style: "margin-bottom: 0.5rem;" %><br />
+        <%= f.label :email, class: "block text-sm font-medium leading-6 text-gray-900", class: "" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input-field" %>
       </div>
 
       <!-- Password Field -->
       <div>
-        <%= f.label :password, class: "block text-sm font-medium leading-6 text-gray-900", style: "margin-bottom: 0.5rem;" %><br />
+        <%= f.label :password, class: "block text-sm font-medium leading-6 text-gray-900" %><br />
         <%= f.password_field :password, autocomplete: "current-password", class: "input-field" %>
       </div>
 

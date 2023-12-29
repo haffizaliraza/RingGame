@@ -1,78 +1,74 @@
-<style>
-/* Add this to your CSS stylesheet */
+<div class="bg-gray-100 flex items-center justify-center h-screen">
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  margin: 0;
-  padding: 0;
-}
+  <div class="bg-white p-8 rounded-md shadow-md max-w-md w-full">
 
-.container {
-  max-width: 400px;
-  margin: 50px auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+    <div class="flex items-center justify-center mb-8">
+      <%= image_tag("logo.png", alt: "Your Logo", class: "h-32 w-32 mr-2") %>
+    </div>
 
-h2 {
-  text-align: center;
-  color: #333;
-}
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form"}) do |f| %>
 
-.field {
-  margin-bottom: 20px;
-}
+      <%= render "devise/shared/error_messages", resource: resource %>
 
-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #555;
-}
+      <div class="mb-4">
+        <%= f.label :first_name, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+      </div>
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-}
+      <div class="mb-4">
+        <%= f.label :last_name, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+      </div>
 
-.actions {
-  text-align: center;
-}
+      <div class="mb-4">
+        <%= f.label :email, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+      </div>
 
-input[type="submit"] {
-  background-color: #4caf50;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
+      <div class="mb-4">
+        <%= f.label :password, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+      </div>
 
-input[type="submit"]:hover {
-  background-color: #45a049;
-}
+      <div class="mb-4">
+        <%= f.label :password_confirmation, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+      </div>
 
-/* Responsive Styles */
+      <div>
+        <%= f.submit "Sign up", class: "w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300" %>
+      </div>
 
-@media screen and (max-width: 600px) {
-  .container {
-    max-width: 100%;
-  }
-}
+    <% end %>
 
-</style>
-<h2>Sign up</h2>
+    <div class="mt-4 text-center">
+      <span class="text-gray-600">Already have an account?</span>
+      <a href="#" class="text-blue-500 ml-1">Login</a>
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Logo -->
 <div style="margin-bottom: 2rem; text-align: center;">
-  <%= image_tag("logo.png", alt: "Your Logo", style: "max-height: 4rem; width: auto;") %>
+  <%= image_tag("logo.png", alt: "Your Logo") %>
 </div>
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -110,3 +106,17 @@ input[type="submit"]:hover {
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
