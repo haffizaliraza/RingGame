@@ -15,7 +15,7 @@ class Api::ShortsController < Api::ApplicationController
   private
 
   def find_game
-    @game = current_user.games.last
+    @game = current_user.is_team_admin ? current_user.team.games.last : current_user.games.last
   end
 
   def short_params

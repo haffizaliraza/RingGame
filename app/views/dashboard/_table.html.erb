@@ -1,0 +1,73 @@
+<div class="rounded-lg my-2">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg border top-2.5">
+    <h1 class='py-2 text-center font-semibold underline'><%= heading %></h1>
+    <table class="w-full striped text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                Game</th>
+                <th scope="col" class="px-6 py-3">
+                User ID</th>
+                <th scope="col" class="px-6 py-3">
+                Team ID</th>
+                <th scope="col" class="px-6 py-3">
+                Shorts Available</th>
+                <th scope="col" class="px-6 py-3">
+                Successful Passes</th>
+                <th scope="col" class="px-6 py-3">
+                Missed Attempts</th>
+                <th scope="col" class="px-6 py-3">
+                Success Rate</th>
+                <th scope="col" class="px-6 py-3">
+                Game Status</th>
+                <th scope="col" class="px-6 py-3">
+                  Actions</th>
+                </tr>
+        </thead>
+        <tbody>
+          <% if games.count > 0 %>
+            <% games.reverse.each do |game| %>
+              <% success_rate = number_to_percentage((game.shorts.where(result: true).count.to_f / game.shorts.count) * 100, precision: 2) %>
+              <tr class="<%= cycle('odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800', 'dark:bg-gray-800 dark:even:bg-gray-900 dark:odd:bg-gray-900 dark:even:bg-gray-800') %> border-b dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <%= game.game_name %>
+                </th>
+                <td class="px-6 py-4">
+                  <%= game.user_id %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.team_id %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.no_of_shots %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.shorts.where(result: true).count %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.shorts.where(result: false).count %>
+                </td>
+                <td class="px-6 py-4 <%= success_rate.to_i > 50 ? "text-green-400" : 'text-red-400'%>">
+                  <% if game.shorts.any? %>
+                    <%= success_rate %>
+                  <% else %>
+                    0%
+                  <% end %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= game.status %>
+                </td>
+                <td class="d-flex align-items-center justify-content-end">
+                  <%= link_to 'Show', game_path(game), class: 'mx-2 btn btn-sm btn-light text-dark' %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+              <tr class='text-center'>
+                <td colspan='7' class='font-semibold italic'>No record Found</td>
+              </tr>
+          <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

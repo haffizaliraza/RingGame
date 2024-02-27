@@ -1,88 +1,53 @@
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
+<div class="bg-gray-100 flex items-center justify-center h-screen">
+  <div class="bg-white p-8 rounded-md shadow-md max-w-md w-full">
+    <div class="flex items-center justify-center mb-8">
+      <% if current_user.team.present? && current_user.team.avatar.attached? %>
+          <%= image_tag(current_user.team.avatar, alt: "Team Logo", class: "h-32 w-32 mr-2") %>
+        <% else %>
+          <%= image_tag("logo.png", alt: "Your Logo", class: "h-32 w-32 mr-2") %>
+        <% end %>
+    </div>
 
-  .form-container {
-   
-    background-color: #ecf0f1;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  }
+    <%= form_with(model: game) do |form| %>
+      <% if game.errors.any? %>
+        <div class="error-message">
+          <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+          <ul>
+            <% game.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  .error-message {
-    color: red;
-    margin-bottom: 20px;
-  }
+      <div class="mb-4">
+        <%= form.label :no_of_shots, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= form.number_field :no_of_shots, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+      </div>
 
-  .form-group {
-    margin-bottom: 20px;
-  }
+      <div class="mb-4">
+        <%= form.label :game_name, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= form.text_field :game_name, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+      </div>
 
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
+      
+      <% if current_user.team.present? %>
+        <div class="flex items-center mb-4">
+          <input id="link-checkbox" type="checkbox" data-team-id="<%= current_user.team.id %>" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+          <label for="link-checkbox" class="mx-1 text-sm font-medium text-gray-900 dark:text-gray-300">Play as Team.</label>
+        </div>
 
-  .form-control {
-    # width: 100%;
-    padding: 8px;
-    box-sizing: border-box;
-  }
+        <%= form.hidden_field :team_id, value: "" %>
+      <% end %>
 
-  .btn-primary {
-    background-color: #3498db;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .btn-primary:hover {
-    background-color: #2980b9;
-  }
-</style>
-
-<div class="form-container">
-  <%= form_with(model: game) do |form| %>
-    <% if game.errors.any? %>
-      <div class="error-message">
-        <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
-        <ul>
-          <% game.errors.each do |error| %>
-            <li><%= error.full_message %></li>
-          <% end %>
-        </ul>
+      <div>
+        <%= form.submit "Submit", class: "w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300" %>
       </div>
     <% end %>
-
-    <div class="form-group">
-      <%= form.label :no_of_shots %>
-      <%= form.number_field :no_of_shots, class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :game_name %>
-      <%= form.text_field :game_name, class: "form-control" %>
-    </div>
-
-    <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, Game.statuses.keys.map { |status| [status.humanize, status] }, {}, class: 'form-control' %>
   </div>
-
-    <div class="form-group">
-      <%= form.submit class: "btn btn-primary" %>
-    </div>
-  <% end %>
 </div>
+<script>
+  document.querySelector('#link-checkbox').addEventListener('change', function () {
+    document.querySelector('#game_team_id').value = event.target.checked ? event.target.dataset.teamId : ''
+  })
+</script>

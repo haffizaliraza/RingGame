@@ -1,0 +1,5 @@
+<% if obj.avatar.attached? %>
+  <%= image_tag(obj.avatar, class: 'rounded-full', width: size, height: size) %>
+<% else %>
+  <%= image_tag 'default-logo.png', class: 'rounded-full', width: size, height: size %>
+<% end %>

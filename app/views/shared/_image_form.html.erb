@@ -1,0 +1,12 @@
+<div class="text-center" data-controller="preview-image">
+  <% if f.object.avatar.attached? %>
+    <label class="dp-wrapper" data-action="click->preview-image#selectImage">
+      <%= image_tag(f.object.avatar, class: 'rounded-full h-40 w-40', data: { preview_image_target: "output" }) %>
+    </label>
+  <% else %>
+    <label data-action="click->preview-image#selectImage">
+      <%= image_tag("user-ink.png", class: 'rounded-full h-40 w-40', data: { preview_image_target: "output" }) %>
+    </label>
+  <% end %>
+  <%= f.file_field :avatar, class: "hidden", data: { preview_image_target: "input", action: "preview-image#displayImagePreview" } %>
+</div>

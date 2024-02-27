@@ -19,15 +19,19 @@
     </div>
     <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
       <div class="flex flex-shrink-0 items-center">
-      <%= image_tag("logo.png", alt: "Your Logo", class: "h-8 w-auto") %>
+        <% if current_user.team.present? && current_user.team.avatar.attached? %>
+          <%= image_tag(current_user.team.avatar, alt: "Team Logo", class: "h-8 w-auto") %>
+        <% else %>
+          <%= image_tag("logo.png", alt: "Your Logo", class: "h-8 w-auto") %>
+        <% end %>
       </div>
       <div class="hidden sm:ml-6 sm:block">
         <div class="flex space-x-4">
           <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-          <a href="#" class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Dashboard</a>
-          <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Start Game</a>
+          <%= link_to 'Dashboard', root_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
+          <%= link_to 'Start Game', new_game_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
           <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Purchase Points</a>
-          <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">States</a>
+          <a href="/stats" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Stats</a>
         </div>
       </div>
     </div>
@@ -46,7 +50,7 @@
           <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true" onclick="toggleDropdown()">
             <span class="absolute -inset-1.5"></span>
             <span class="sr-only">Open user menu</span>
-            <%= image_tag current_user.avatar.attached? ? current_user.avatar : 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80', class: "h-8 w-8 rounded-full"  %>
+            <%= image_tag current_user.avatar.attached? ? current_user.avatar : 'default-logo.png', class: "h-8 w-8 rounded-full"  %>
           </button>
         </div>
 

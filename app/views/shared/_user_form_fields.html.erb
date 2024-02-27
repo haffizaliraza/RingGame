@@ -1,0 +1,54 @@
+<div class="mb-4">
+    <%= f.label :avatar, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <div class="relative pt-3">
+        <%= render 'shared/image_form', f: f %>
+    </div>
+</div>
+
+<div class="mb-4">
+    <%= f.label :first_name, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :last_name, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.text_field :last_name, autocomplete: "last_name", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :email, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.email_field :email, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :country, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.text_field :country, autocomplete: "country", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :state, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.text_field :state, autocomplete: "state", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :city, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.text_field :city, autocomplete: "city", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :gender, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.select :gender, User.genders.keys.map { |status| [status.humanize, status] }, {}, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :password, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+</div>
+
+<div class="mb-4">
+    <%= f.label :password_confirmation, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
+</div>

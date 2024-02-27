@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[edits update]
+  before_action :set_user, only: %i[edit destroy_avatar update]
 
   def edit; end
 
@@ -13,6 +13,12 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy_avatar
+    @user.avatar.purge
+
+    redirect_to edit_user_path
+  end
+
   private
 
   def set_user
@@ -20,6 +26,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :avatar, :password, :password_confirmation)
+    params.require(:user).permit(:first_name, :gender, :last_name, :email, :avatar, :country, :state, :city, :password, :password_confirmation)
   end
 end
