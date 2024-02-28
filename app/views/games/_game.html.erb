@@ -1,16 +1,4 @@
 <div class="mt-8 mx-12">
-  <!-- User Information -->
-  <div class="flex items-center mb-6">
-    <div class="mr-4">
-      <!-- User Image -->
-      <%= image_tag(current_user.avatar, alt: current_user.first_name, class: "h-16 w-16 rounded-full") %>
-    </div>
-    <div>
-      <!-- User Name -->
-      <h2 class="text-xl font-semibold text-gray-800 dark:text-white"><%= current_user.first_name %> <%= current_user.last_name %></h2>
-    </div>
-  </div>
-
   <!-- Game Statistics -->
   <h2 class="text-3xl font-bold mb-6 text-gray-800 dark:text-white">Game Statistics</h2>
 
@@ -54,7 +42,12 @@
     <!-- Status -->
     <div class="bg-white dark:bg-gray-800 dark:text-white p-8 rounded-md shadow-md">
       <h3 class="text-lg font-semibold mb-4">Status</h3>
-      <p class="text-4xl font-bold"><%= game.status %></p>
+      <p class="text-4xl font-bold"><%= game.status.to_s.humanize %></p>
     </div>
+  </div>
+  <div class="text-center py-8"> 
+    <% if game.status == 'completed' %>
+      <%= link_to "Done", authenticated_root_path, class: "text-white mx-2 my-2 px-6 rounded-md py-2 h-4 w-4 bg-blue-400", data:{turbo: false} %>
+    <% end %>
   </div>
 </div>

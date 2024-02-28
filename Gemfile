@@ -74,3 +74,6 @@ group :test do
 
 end
 gem 'jwt'
+gem 'kaminari'
+gem 'chartkick'
+gem 'groupdate'

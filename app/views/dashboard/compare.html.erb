@@ -1,0 +1,53 @@
+<% active_class = "inline-block p-4 text-blue-600 bg-gray-100 rounded-t-lg active dark:bg-gray-800 dark:text-blue-500" %>
+<% not_active_class = "inline-block p-4 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300" %>
+<div class="my-8 mx-12" data-controller='stat comparison-tab'>
+  <!-- Stats -->
+  <h2 class="text-3xl text-center font-bold mb-6 text-gray-800 dark:text-white">Select for Compare</h2>
+
+  <div class='flex content-center'>
+    <div class="w-3/4 text-center p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+        <li id="individual-tab" class="me-2">
+          <button class="<%= params[:user_1].present? || params[:user_2].present? || !params[:team_1].present? || !params[:team_2].present? ? active_class : not_active_class %>">User</button>
+        </li>
+        <li id="team-tab" class="me-2">
+          <button class="<%= params[:team_1].present? || params[:team_2].present? ? active_class : not_active_class %>">Team</button>
+        </li>
+      </ul>
+
+      <div class="<%= params[:user_1].present? || params[:user_2].present? || !params[:team_1].present? || !params[:team_2].present? ? '' : 'hidden' %> individual-form">
+        <%= form_with(url: compare_path, method: :get, data: { turbo: true }) do |form| %>
+          <div class="flex items-center my-2">
+            <%= form.select :user_1, options_for_select(user_list, params[:user_1]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+            <%= form.select :user_2, options_for_select(user_list, params[:user_2]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+          </div>
+          <%= form.submit "Filter", class: "bg-blue-500 hover:bg-blue-600 my-2 text-white px-2 py-1 rounded-md transition duration-300 ease-in-out", data: { turbo_frame: 'table-frame' } %>
+        <% end %>
+      </div>
+
+      <div class="<%= params[:team_1].present? || params[:team_2].present? ? '' : 'hidden' %> team-form">
+        <%= form_with(url: compare_path, method: :get, data: { turbo: true }) do |form| %>
+          <div class="flex items-center my-2">
+            <%= form.select :team_1, options_for_select(team_list, params[:team_1]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+            <%= form.select :team_2, options_for_select(team_list, params[:team_2]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+          </div>
+          <%= form.submit "Filter", class: "bg-blue-500 hover:bg-blue-600 my-2 text-white px-2 py-1 rounded-md transition duration-300 ease-in-out", data: { turbo_frame: 'table-frame' } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if params[:user_1].present? || params[:team_1].present? %>
+    <div class='w-full flex'>
+      <!-- Comparison -->
+      <div class="sm:w-2/4 mb-10 px-4">
+        <%= render partial: 'detail', locals: { record: @records1 } %>
+        <%#= render 'compare_table', games: @records1  %>
+      </div>
+      <div class="sm:w-2/4 mb-10 px-4">
+        <%= render partial: 'detail', locals: { record: @records2 } %>
+        <%#= render 'compare_table', games: @records2 %>
+      </div>
+    </div>
+  <% end %>
+</div>

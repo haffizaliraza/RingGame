@@ -20,7 +20,8 @@ class Api::ApplicationController < ActionController::API
     begin
       decoded_token = JsonWebToken.decode(token)
       user_id = decoded_token['user_id']
-      User.find_by(id: user_id)
+      user = User.find_by(id: user_id)
+      sign_in user if current_user != user_id
     rescue JWT::DecodeError, ActiveRecord::RecordNotFound
       false
     end

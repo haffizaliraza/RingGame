@@ -1,0 +1,10 @@
+<div class="sm:w-1/4 mb-10 px-4">
+  <div class="rounded-lg"> 
+    <div class="max-w-md bg-white dark:bg-gray-800 dark:text-white p-3 rounded-md shadow-md">
+      <h2 class="text-2xl font-bold mb-4"><%= heading %></h2>
+      <div class="w-full bg-gray-200 rounded-full dark:bg-gray-700">
+        <div class="bg-gradient-to-r from-pink-500 to-yellow-500 text-xs font-medium text-blue-100 text-center p-0.5 leading-none rounded-full" style="width: <%= stats.present? ? stats : 0  %>%"><%= stats.present? ? stats : 0  %>%</div>
+      </div>
+    </div>
+  </div>
+</div>

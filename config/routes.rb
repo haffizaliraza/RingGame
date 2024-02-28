@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   resources :shorts
   resources :games
-  get 'dashboard/index'
-  devise_for :users
-  resources :users, only: %i[edit update]
-  root to: 'dashboard#index', as: :authenticated_root
+  resources :teams
+  devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
+  resources :users, only: %i[edit update] do
+    member do
+      delete :destroy_avatar
+    end
+  end
+  root to: 'dashboard#public'
+  get 'stats', to: 'dashboard#index', as: :authenticated_root
+  get 'compare', to: 'dashboard#compare'
 
   namespace :api do
     post :auth, to: "authentication#create"

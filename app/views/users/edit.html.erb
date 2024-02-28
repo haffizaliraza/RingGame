@@ -8,6 +8,24 @@
 
     <%= form_for(current_user, url: user_path, html: { method: :patch }) do |f| %>
 
+
+      <div class="mb-4">
+        <%= f.label :avatar, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <div class="relative pt-3">
+          <div class="avatar-destroy-logo">
+            <% if current_user.avatar.persisted? %>
+              <%= link_to destroy_avatar_user_path, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to delete?' }, class:'close-circle', title: 'Remove Image'  do %>
+                <svg class="w-4 h-4 text-red-500" viewBox="0 0 448 512">
+                  <path fill="currentColor" d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"></path>
+                </svg>
+
+              <% end %>
+            <% end %>
+          </div>
+          <%= render 'shared/image_form', f: f %>
+        </div>
+      </div>
+
       <div class="mb-4">
         <%= f.label :first_name, class: "block text-gray-600 text-sm font-semibold mb-2" %>
         <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
@@ -23,9 +41,20 @@
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500", required: true %>
       </div>
 
+
       <div class="mb-4">
-        <%= f.label :avatar, class: "block text-gray-600 text-sm font-semibold mb-2" %>
-        <%= f.file_field :avatar, class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+        <%= f.label :country, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.text_field :country, autocomplete: "country", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :state, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.text_field :state, autocomplete: "state", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :city, class: "block text-gray-600 text-sm font-semibold mb-2" %>
+        <%= f.text_field :city, autocomplete: "city", class: "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500" %>
       </div>
 
       <div>

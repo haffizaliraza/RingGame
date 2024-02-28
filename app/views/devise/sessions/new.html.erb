@@ -35,82 +35,9 @@
     <div class="mt-4 text-center">
       <span class="text-gray-600">Don't have an account?</span>
       <%= link_to 'Sign up', new_user_registration_path, class: "text-blue-500 ml-1" %>
+      <%= link_to 'Forgot Password?', new_user_password_path, class: "text-blue-500 ml-1" %>
     </div>
 
   </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div class="container">
-
-    <!-- Logo -->
-    <div class="logo-container">
-      <%= image_tag("logo.png", alt: "Your Logo", class: "logo") %>
-    </div>
-
-    <!-- Form -->
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-container"}) do |f| %>
-
-      <!-- Email Field -->
-      <div>
-        <%= f.label :email, class: "block text-sm font-medium leading-6 text-gray-900", class: "" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input-field" %>
-      </div>
-
-      <!-- Password Field -->
-      <div>
-        <%= f.label :password, class: "block text-sm font-medium leading-6 text-gray-900" %><br />
-        <%= f.password_field :password, autocomplete: "current-password", class: "input-field" %>
-      </div>
-
-      <!-- Remember Me Checkbox -->
-      <% if devise_mapping.rememberable? %>
-        <div class="remember-me-container">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me, style: "margin: 0;" %>
-        </div>
-      <% end %>
-
-      <!-- Submit Button -->
-      <div>
-        <%= f.submit "Log in", class: "btn-primary", style: "text-align: center;" %>
-      </div>
-
-    <% end %>
-
-    <%= link_to 'Sign Up', new_user_registration_path %>
-    <br>
-    <%= link_to 'Forgot Password?', new_user_password_path %>
-
-  </div>
