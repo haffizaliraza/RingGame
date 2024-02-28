@@ -11,10 +11,9 @@ class DashboardController < ApplicationController
 
   def public
     case params[:type]
-    when 'team' then display_ranks(TeamRank)
     when 'male' then display_ranks(MaleRank)
     when 'female' then display_ranks(FemaleRank)
-    else display_ranks(OverallRank)
+    else display_ranks(TeamRank)
     end
   end
 
@@ -22,6 +21,7 @@ class DashboardController < ApplicationController
 
   def team_comparison
     @records1, @records2 = fetch_comparison_records(Team, params[:team_1], params[:team_2])
+    @records1, @records2 = @records1.users.first, @records2.users.first
   end
 
   def user_comparison
@@ -31,7 +31,7 @@ class DashboardController < ApplicationController
   def fetch_comparison_records(model, id1, id2)
     entity1 = model.find(id1)
     entity2 = model.find(id2)
-    [entity1.games.last(10), entity2.games.last(10)]
+    [entity1, entity2]
   end
 
   def display_ranks(rank_model)

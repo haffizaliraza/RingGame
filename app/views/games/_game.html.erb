@@ -47,7 +47,7 @@
   </div>
   <div class="text-center py-8"> 
     <% if game.status == 'completed' %>
-      <%= link_to "Done", dashboard_index_path, class: "text-white mx-2 my-2 px-6 rounded-md py-2 h-4 w-4 bg-blue-400", data:{turbo: false} %>
+      <%= link_to "Done", authenticated_root_path, class: "text-white mx-2 my-2 px-6 rounded-md py-2 h-4 w-4 bg-blue-400", data:{turbo: false} %>
     <% end %>
   </div>
 </div>

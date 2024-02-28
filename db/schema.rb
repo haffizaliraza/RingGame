@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_26_112118) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_26_105310) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -67,16 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_26_112118) do
     t.index ["user_id"], name: "index_male_ranks_on_user_id"
   end
 
-  create_table "overall_ranks", force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "user_id"
-    t.float "success_rate", default: 0.0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_overall_ranks_on_team_id"
-    t.index ["user_id"], name: "index_overall_ranks_on_user_id"
-  end
-
   create_table "shorts", force: :cascade do |t|
     t.integer "game_id", null: false
     t.boolean "result"
@@ -126,8 +116,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_26_112118) do
   add_foreign_key "games", "teams"
   add_foreign_key "games", "users"
   add_foreign_key "male_ranks", "users"
-  add_foreign_key "overall_ranks", "teams"
-  add_foreign_key "overall_ranks", "users"
   add_foreign_key "shorts", "games"
   add_foreign_key "team_ranks", "teams"
   add_foreign_key "users", "teams"

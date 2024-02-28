@@ -7,6 +7,7 @@
             <th scope="col" class="px-6 py-3">Name</th>
             <th scope="col" class="px-6 py-3">Rank</th>
             <th scope="col" class="px-6 py-3">Success Rate</th>
+            <th scope="col" class="px-6 py-3">Total Games</th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +22,9 @@
                 </td>
                 <td class="px-6 py-4 <%= rank.success_rate.to_i > 50 ? 'text-green-400' : 'text-red-400'%>">
                   <%= rank.success_rate %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= rank.class.to_s != "TeamRank" ? rank.user.games.count : rank.team.games.count %>
                 </td>
               </tr>
             <% end %>

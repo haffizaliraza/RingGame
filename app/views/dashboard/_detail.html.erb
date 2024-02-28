@@ -1,0 +1,29 @@
+<% games = record.is_team_admin ? record.team.games : record.games %>
+<% ranks = record.is_team_admin ? record.team.team_ranks : record.male? ? record.male_ranks : record.female_ranks %>
+
+<div class="bg-white rounded-lg shadow-md p-6 my-4">
+  <div class="flex items-center justify-between mb-4">
+    <h2 class="text-xl font-semibold"><%= record.first_name %> <%= record.last_name %></h2>
+    <span class="text-gray-500"><%= record.email %></span>
+  </div>
+  <div>
+    <p class="text-gray-700 mb-2">Total Games: <%= games.count %></p>
+    <p class="text-gray-700 mb-2">Success Rate: <%= ranks&.last&.success_rate %></p>
+    <% if games.any? %>
+      <p class="text-gray-700 mb-2">Last Game Played on: <%= games.last.created_at %></p>
+      <p class="text-gray-700 mb-2">Last Game Success Rate: <%= games.last.calculate_score&.round(2) %></p>
+    <% else %>
+      <p class="text-gray-700 mb-2">No games played.</p>
+    <% end %>
+
+    <% if record.team %>
+      <p class="text-gray-700 mb-2">Team: <%= record.team.name %></p>
+    <% end %>
+  </div>
+
+  <% if games.any? %>
+    <%= line_chart calculate_success_rates(games) %>
+  <% else %>
+    <p class="text-gray-700">No games with shots found.</p>
+  <% end %>
+</div>
