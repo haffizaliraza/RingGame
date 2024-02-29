@@ -13,11 +13,9 @@
   <body>
     <main>
       <p class="text-green-500"><%= notice %></p>
-      <% if user_signed_in? %>
-        <div class="dashboard-top">
-          <%= render partial: 'shared/navbar' %>
-        </div>
-      <% end %>
+      <div class="dashboard-top">
+        <%= render partial: 'shared/navbar' %>
+      </div>
       <%= yield %>
     </main>
   </body>

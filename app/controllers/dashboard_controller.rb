@@ -39,7 +39,7 @@ class DashboardController < ApplicationController
   end
 
   def fetch_game_stats
-    @games = current_user.games.includes(:shorts)
+    @games = Game.where(user_id: current_user.id).page(params[:page]).includes(:shorts)
     @shorts = @games.flat_map(&:shorts)
 
     calculate_success_rates
@@ -50,23 +50,11 @@ class DashboardController < ApplicationController
     return if total_shorts_count.zero?
 
     @success_rate = calculate_rate(@shorts)
-    @solo_shorts, @team_shorts = separate_shorts_by_game_type
-    @solo_success_rate = calculate_rate(@solo_shorts)
-    @team_success_rate = calculate_rate(@team_shorts)
   end
 
   def calculate_rate(shorts)
     rate = (shorts.select(&:result).count.to_f / shorts.count) * 100
     rate.round(2)
-  end
-
-  def separate_shorts_by_game_type
-    solo_games, team_games = @games.partition { |game| game.team_id.nil? }
-
-    solo_shorts = @shorts.select { |short| solo_games.pluck(:id).include?(short.game_id) }
-    team_shorts = @shorts.select { |short| team_games.pluck(:id).include?(short.game_id) }
-
-    [solo_shorts, team_shorts]
   end
 end
 

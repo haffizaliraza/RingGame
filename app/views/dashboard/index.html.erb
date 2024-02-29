@@ -1,18 +1,22 @@
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-10 mx-auto">
     <h1 class="text-3xl font-bold text-center mb-10">Game Stats</h1>
-    <div class="flex flex-wrap justify-between -mx-4 -mb-10  ">
-      <!-- Total Winning Stats -->
-      <%= render 'stats_progress', heading: 'Total Winning', stats: @success_rate  %>
-      <!-- Solo Winning Stats -->
-      <%= render 'stats_progress', heading: 'Solo Winning', stats: @solo_success_rate  %>
-      <!-- Team Winning Stats -->
-      <%= render 'stats_progress', heading: 'Team Winning', stats: @team_success_rate  %>
+    <div class="flex flex-wrap justify-between -mb-10">
+      <div class='w-full flex justify-center'>
+        <%= render 'stats_progress', heading: 'Total Winning', stats: @success_rate  %>
+      </div>
+      <div class='w-full'>
+        <%= line_chart calculate_success_rates(@games) %>
+      </div>
       <div class="w-full mb-10 px-4">
-        <%= render 'table', heading: 'Individual Games', games: @games ? @games.select{|game| game.team_id == nil} : [] %>
-        <% if current_user.team.present? %>
-          <%= render 'table', heading: 'Team Games', games: current_user.team.games  %>
+        <% if current_user.is_team_admin %>
+          <%= render 'table', heading: 'Team Games', games: @games  %>
+        <% else %>
+          <%= render 'table', heading: 'Individual Games', games: @games %>
         <% end %>
+        <div class='mt-4 text-center'>
+          <%= paginate @games %>
+        </div>
       </div>
     </div>
   </div>
