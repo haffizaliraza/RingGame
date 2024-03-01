@@ -6,32 +6,55 @@ class DashboardController < ApplicationController
   end
 
   def compare
-    params[:user_1].present? ? user_comparison : params[:team_1].present? ? team_comparison : nil
+    case
+    when params[:user_1].present? then user_comparison
+    when params[:team_1] then team_comparison
+    when params[:country_1] then country_comparison
+    when params[:state_1] then state_comparison
+    else
+      @records1, @records2 = [[], []]
+    end
   end
 
   def public
-    case params[:type]
-    when 'male' then display_ranks(MaleRank)
-    when 'female' then display_ranks(FemaleRank)
-    else display_ranks(TeamRank)
-    end
+    display_ranks(Rank)
   end
 
   private
 
   def team_comparison
-    @records1, @records2 = fetch_comparison_records(Team, params[:team_1], params[:team_2])
-    @records1, @records2 = @records1.users.first, @records2.users.first
+    fetch_comparison_records(Team, params[:team_1], params[:team_2])
   end
 
   def user_comparison
-    @records1, @records2 = fetch_comparison_records(User, params[:user_1], params[:user_2])
+    fetch_comparison_records(User, params[:user_1], params[:user_2])
+  end
+
+  def country_comparison
+    fetch_records(User, params[:country_1], params[:country_2], 'country')
+  end
+
+  def state_comparison
+    fetch_records(User, params[:state_1], params[:state_2], 'state')
+  end
+
+  def fetch_records(model, column1, column2, column_name)
+    entities = [model.where(column_name.to_sym => column1),
+                model.where(column_name.to_sym => column2)]
+    fetch_comparison_ranks(entities)
   end
 
   def fetch_comparison_records(model, id1, id2)
-    entity1 = model.find(id1)
-    entity2 = model.find(id2)
-    [entity1, entity2]
+    entities = [model.find(id1), model.find(id2)]
+    fetch_comparison_ranks(entities)
+  end
+
+  def fetch_comparison_ranks(entities)
+    @records1, @records2 = entities
+    record_ids1 = @records1.class.to_s == 'User' ? @records1 : @records1.pluck(:id)
+    record_ids1 = @records2.class.to_s == 'User' ? @records2 : @records2.pluck(:id)
+    @ranks1 = Rank.where(user_id: record_ids1).last(10)
+    @ranks2 = Rank.where(user_id: record_ids1).last(10)
   end
 
   def display_ranks(rank_model)
@@ -57,4 +80,3 @@ class DashboardController < ApplicationController
     rate.round(2)
   end
 end
-

@@ -8,18 +8,44 @@
     <div class="w-3/4 text-center p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
       <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
         <li id="individual-tab" class="me-2">
-          <button class="<%= params[:user_1].present? || params[:user_2].present? || !params[:team_1].present? || !params[:team_2].present? ? active_class : not_active_class %>">User</button>
+          <button class="<%= params[:user_1].present? || params[:user_2].present? || (!params[:team_1].present? || !params[:team_2].present?) && (!params[:state_1].present? || !params[:state_2].present?) && (!params[:country_1].present? || !params[:country_2].present?) ? active_class : not_active_class %>">Mens VS Women</button>
+        </li>
+        <li id="state-tab" class="me-2">
+          <button class="<%= params[:state_1].present? || params[:state_2].present? ? active_class : not_active_class %>">State VS State</button>
+        </li>
+        <li id="country-tab" class="me-2">
+          <button class="<%= params[:country_1].present? || params[:country_2].present? ? active_class : not_active_class %>">Country VS Country</button>
         </li>
         <li id="team-tab" class="me-2">
-          <button class="<%= params[:team_1].present? || params[:team_2].present? ? active_class : not_active_class %>">Team</button>
+          <button class="<%= params[:team_1].present? || params[:team_2].present? ? active_class : not_active_class %>">Team VS Team</button>
         </li>
       </ul>
 
-      <div class="<%= params[:user_1].present? || params[:user_2].present? || !params[:team_1].present? || !params[:team_2].present? ? '' : 'hidden' %> individual-form">
+      <div class="<%= params[:user_1].present? || params[:user_2].present? || (!params[:team_1].present? || !params[:team_2].present?) && (!params[:state_1].present? || !params[:state_2].present?) && (!params[:country_1].present? || !params[:country_2].present?) ? '' : 'hidden' %> individual-form">
         <%= form_with(url: compare_path, method: :get, data: { turbo: true }) do |form| %>
           <div class="flex items-center my-2">
-            <%= form.select :user_1, options_for_select(user_list, params[:user_1]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
-            <%= form.select :user_2, options_for_select(user_list, params[:user_2]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+            <%= form.select :user_1, options_for_select(user_list('male'), params[:user_1]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+            <%= form.select :user_2, options_for_select(user_list('female'), params[:user_2]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+          </div>
+          <%= form.submit "Filter", class: "bg-blue-500 hover:bg-blue-600 my-2 text-white px-2 py-1 rounded-md transition duration-300 ease-in-out", data: { turbo_frame: 'table-frame' } %>
+        <% end %>
+      </div>
+
+      <div class="<%= params[:state_1].present? || params[:state_2].present? ? '' : 'hidden' %> state-form">
+        <%= form_with(url: compare_path, method: :get, data: { turbo: true }) do |form| %>
+          <div class="flex items-center my-2">
+            <%= form.select :state_1, options_for_select(state_list, params[:state_1]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+            <%= form.select :state_2, options_for_select(state_list, params[:state_2]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+          </div>
+          <%= form.submit "Filter", class: "bg-blue-500 hover:bg-blue-600 my-2 text-white px-2 py-1 rounded-md transition duration-300 ease-in-out", data: { turbo_frame: 'table-frame' } %>
+        <% end %>
+      </div>
+
+      <div class="<%= params[:country_1].present? || params[:country_2].present? ? '' : 'hidden' %> country-form">
+        <%= form_with(url: compare_path, method: :get, data: { turbo: true }) do |form| %>
+          <div class="flex items-center my-2">
+            <%= form.select :country_1, options_for_select(country_list, params[:country_1]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
+            <%= form.select :country_2, options_for_select(country_list, params[:country_2]), {}, class: "bg-gray-50 mx-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" %>
           </div>
           <%= form.submit "Filter", class: "bg-blue-500 hover:bg-blue-600 my-2 text-white px-2 py-1 rounded-md transition duration-300 ease-in-out", data: { turbo_frame: 'table-frame' } %>
         <% end %>
@@ -37,16 +63,44 @@
     </div>
   </div>
 
-  <% if params[:user_1].present? || params[:team_1].present? %>
-    <div class='w-full flex'>
-      <!-- Comparison -->
+  <% if params[:user_1].present? || params[:team_1].present? || params[:state_1].present? || params[:country_1].present? %>
+    <% if params[:user_1].present? || params[:team_2].present? %>
+      <div class='w-full flex'>
+        <!-- Comparison -->
+        <div class="sm:w-2/4 mb-10 px-4">
+          <%= render partial: 'detail', locals: { record: @records1, ranks: @ranks1 } %>
+        </div>
+        <div class="sm:w-2/4 mb-10 px-4">
+          <%= render partial: 'detail', locals: { record: @records2, ranks: @ranks2 } %>
+        </div>
+      </div>
+    <% else %>
+      <div class='w-full flex'>
+        <!-- Comparison -->
+        <div class="sm:w-2/4 mb-10 px-4">
+          <%= render partial: 'table_detail', locals: { record: @records1, ranks: @ranks1 } %>
+        </div>
+        <div class="sm:w-2/4 mb-10 px-4">
+          <%= render partial: 'table_detail', locals: { record: @records2, ranks: @ranks2 } %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="hidden state-table">
+      <%= render 'rank_table', heading: "State Ranks", ranks: total_ranks  %>
+    </div>
+    <div class="hidden country-table">
+      <%= render 'rank_table', heading: "Country Ranks", ranks: total_ranks  %>
+    </div>
+    <div class="hidden team-table">
+      <%= render 'rank_table', heading: "Team Ranks", ranks: total_team_ranks  %>
+    </div>
+    <div class="gender-table flex">
       <div class="sm:w-2/4 mb-10 px-4">
-        <%= render partial: 'detail', locals: { record: @records1 } %>
-        <%#= render 'compare_table', games: @records1  %>
+        <%= render 'rank_table', heading: "Male Ranks", ranks: total_male_ranks  %>
       </div>
       <div class="sm:w-2/4 mb-10 px-4">
-        <%= render partial: 'detail', locals: { record: @records2 } %>
-        <%#= render 'compare_table', games: @records2 %>
+        <%= render 'rank_table', heading: "Female Ranks", ranks: total_female_ranks  %>
       </div>
     </div>
   <% end %>

@@ -1,5 +1,5 @@
 <% games = record.is_team_admin ? record.team.games : record.games %>
-<% ranks = record.is_team_admin ? record.team.team_ranks : record.male? ? record.male_ranks : record.female_ranks %>
+<% ranks = record.ranks %>
 
 <div class="bg-white rounded-lg shadow-md p-6 my-4">
   <div class="flex items-center justify-between mb-4">

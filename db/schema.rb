@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_26_105310) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_26_105203) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,14 +39,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_26_105310) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "female_ranks", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.float "success_rate", default: 0.0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_female_ranks_on_user_id"
-  end
-
   create_table "games", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "no_of_shots"
@@ -59,12 +51,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_26_105310) do
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
-  create_table "male_ranks", force: :cascade do |t|
+  create_table "ranks", force: :cascade do |t|
     t.integer "user_id", null: false
+    t.integer "team_id"
     t.float "success_rate", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_male_ranks_on_user_id"
+    t.index ["team_id"], name: "index_ranks_on_team_id"
+    t.index ["user_id"], name: "index_ranks_on_user_id"
   end
 
   create_table "shorts", force: :cascade do |t|
@@ -73,14 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_26_105310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_shorts_on_game_id"
-  end
-
-  create_table "team_ranks", force: :cascade do |t|
-    t.integer "team_id", null: false
-    t.float "success_rate", default: 0.0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_team_ranks_on_team_id"
   end
 
   create_table "teams", force: :cascade do |t|
@@ -112,11 +98,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_26_105310) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "female_ranks", "users"
   add_foreign_key "games", "teams"
   add_foreign_key "games", "users"
-  add_foreign_key "male_ranks", "users"
+  add_foreign_key "ranks", "teams"
+  add_foreign_key "ranks", "users"
   add_foreign_key "shorts", "games"
-  add_foreign_key "team_ranks", "teams"
   add_foreign_key "users", "teams"
 end

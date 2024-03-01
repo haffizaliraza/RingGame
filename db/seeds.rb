@@ -1,19 +1,24 @@
+states = ["State A", "State B", "State C", "State D", "State E"]
+countries = ["Country X", "Country Y", "Country Z"]
 # Create teams
 teams = []
 10.times do |i|
   teams << Team.create(name: "Team #{i+1}")
 end
 
-# Create 20 users
+# Create 30 users
 30.times do |i|
+  state = states.sample
+  country = countries.sample
+
   user = User.create(
     email: "user_#{i+1}@example.com",
     password: "password",
     first_name: "User",
     last_name: "#{i+1}",
     city: "City",
-    state: "State",
-    country: "Country",
+    state: state,
+    country: country,
     is_team_admin: false,
     gender: i.even? ? 0 : 1
   )
@@ -93,25 +98,15 @@ User.where.not(team_id: nil).each_with_index do |user, index|
   end
 end
 
-Team.all.each do |team|
-  next if team.games.length < 1
-  team_rank = TeamRank.find_or_initialize_by(team_id: team.id)
-  success_rate = team.current_success_rate
-  team_rank.success_rate = success_rate
-  team_rank.save
-end
-
-User.where(team_id: nil).each do |user|
+User.all.each do |user|
   next if user.games.length < 1
-  if user.gender == 'male'
-    user_rank = MaleRank.find_or_initialize_by(user_id: user.id)
-    success_rate = user.current_success_rate
-    user_rank.success_rate = success_rate
-    user_rank.save
+  user_rank = {}
+  if user.is_team_admin
+    user_rank = Rank.find_or_initialize_by(user_id: user.id, team_id: user.team.id)
   else
-    user_rank = FemaleRank.find_or_initialize_by(user_id: user.id)
-    success_rate = user.current_success_rate
-    user_rank.success_rate = success_rate
-    user_rank.save
+    user_rank = Rank.find_or_initialize_by(user_id: user.id)
   end
+  success_rate = user.current_success_rate
+  user_rank.success_rate = success_rate
+  user_rank.save
 end

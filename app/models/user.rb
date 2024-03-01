@@ -1,8 +1,7 @@
 class User < ApplicationRecord
   has_many :games
   belongs_to :team, optional: true
-  has_many :male_ranks
-  has_many :female_ranks
+  has_many :ranks
 
   GENDER = { male: 0, female: 1 }.freeze
   enum gender: GENDER
