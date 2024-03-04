@@ -70,4 +70,8 @@ module DashboardHelper
       success_rates[username] = rank.success_rate
     end
   end
+
+  def team_players
+    current_user.team.users.where.not(id: current_user.id)
+  end
 end

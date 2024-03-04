@@ -33,6 +33,7 @@
             <%= link_to 'Start Game', new_game_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" %>
             <a href="#" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Purchase Points</a>
             <a href="/stats" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Stats</a>
+            <%= link_to 'Add Player', add_player_team_path(current_user.team), class: "text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" if current_user.is_team_admin %>
           <% end %>
           <a href="/compare" class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Compare</a>
         </div>

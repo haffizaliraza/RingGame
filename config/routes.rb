@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   resources :shorts
   resources :games
-  resources :teams
+  resources :teams do
+    member do
+      get :add_player
+      post :create_player
+    end
+  end
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
   resources :users, only: %i[edit update] do
     member do

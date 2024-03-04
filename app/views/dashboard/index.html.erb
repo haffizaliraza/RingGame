@@ -8,15 +8,22 @@
       <div class='w-full'>
         <%= line_chart calculate_success_rates(@games) %>
       </div>
-      <div class="w-full mb-10 px-4">
-        <% if current_user.is_team_admin %>
-          <%= render 'table', heading: 'Team Games', games: @games  %>
-        <% else %>
-          <%= render 'table', heading: 'Individual Games', games: @games %>
-        <% end %>
-        <div class='mt-4 text-center'>
-          <%= paginate @games %>
+      <div class='w-full flex'>
+        <div class="<%= current_user.is_team_admin ? 'w-3/4' : 'w-full' %> mb-10 px-4">
+          <% if current_user.is_team_admin %>
+            <%= render 'table', heading: 'Team Games', games: @games  %>
+          <% else %>
+            <%= render 'table', heading: 'Individual Games', games: @games %>
+          <% end %>
+          <div class='mt-4 text-center'>
+            <%= paginate @games %>
+          </div>
         </div>
+        <% if current_user.is_team_admin %>
+          <div class="w-1/4 mb-10 px-4">
+            <%= render 'player', players: team_players %>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

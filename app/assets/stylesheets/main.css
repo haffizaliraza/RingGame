@@ -2,7 +2,7 @@
   width: 80%;
   margin: 20px auto;
 }
-  
+
 .p {
   text-align: center;
   font-size: 14px;
@@ -20,14 +20,21 @@
 }
 
 .page {
-  border: 1px solid;
-  padding: 2px 8px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
   margin: 0 4px;
   cursor: pointer;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: background-color 0.3s ease;
 }
+
 .page.current {
-  color: rgb(37, 196, 240);
+  color: #fff;
+  background-color: rgb(37, 196, 240);
 }
-.content-center{
+
+.content-center {
   justify-content: center;
 }

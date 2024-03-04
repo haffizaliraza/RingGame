@@ -56,9 +56,9 @@ class DashboardController < ApplicationController
   def fetch_comparison_ranks(entities)
     @records1, @records2 = entities
     record_ids1 = @records1.class.to_s == 'User' ? @records1 : @records1.pluck(:id)
-    record_ids1 = @records2.class.to_s == 'User' ? @records2 : @records2.pluck(:id)
+    record_ids2 = @records2.class.to_s == 'User' ? @records2 : @records2.pluck(:id)
     @ranks1 = Rank.where(user_id: record_ids1).last(10)
-    @ranks2 = Rank.where(user_id: record_ids1).last(10)
+    @ranks2 = Rank.where(user_id: record_ids2).last(10)
   end
 
   def display_ranks(rank_model)

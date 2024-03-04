@@ -1,0 +1,23 @@
+<div class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+  <div data-controller="tab" class="bg-white my-8 p-8 rounded-md shadow-md max-w-md w-full">
+
+    <div class="flex items-center justify-center mb-8">
+      <%= image_tag("logo.png", alt: "Your Logo", class: "h-32 w-32 mr-2") %>
+    </div>
+
+    <%= form_for(@user, url: create_player_team_path(current_user.team), html: {class: "form"}) do |f| %>
+
+      <%= f.hidden_field :is_team_admin, value: false %>
+
+      <%= render "shared/user_form_fields", f: f %>
+    
+      <div>
+        <%= f.submit "Sign up", class: "w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300" %>
+      </div>
+    
+    <% end %>
+
+  </div>
+
+</div>

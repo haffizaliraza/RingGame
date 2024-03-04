@@ -96,6 +96,8 @@ GEM
       responders
       warden (~> 1.2.3)
     erubi (1.12.0)
+    faker (3.2.3)
+      i18n (>= 1.8.11, < 2)
     ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -266,6 +268,7 @@ DEPENDENCIES
   chartkick
   debug
   devise (~> 4.8)
+  faker
   groupdate
   importmap-rails
   jbuilder

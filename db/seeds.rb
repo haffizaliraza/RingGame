@@ -3,7 +3,7 @@ countries = ["Country X", "Country Y", "Country Z"]
 # Create teams
 teams = []
 10.times do |i|
-  teams << Team.create(name: "Team #{i+1}")
+  teams << Team.create(name: Faker::Team.name)
 end
 
 # Create 30 users
@@ -12,15 +12,15 @@ end
   country = countries.sample
 
   user = User.create(
-    email: "user_#{i+1}@example.com",
+    email: Faker::Internet.email,
     password: "password",
-    first_name: "User",
-    last_name: "#{i+1}",
-    city: "City",
-    state: state,
-    country: country,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    city: Faker::Address.city,
+    state: Faker::Address.state,
+    country: Faker::Address.country,
     is_team_admin: false,
-    gender: i.even? ? 0 : 1
+    gender: Faker::Gender.binary_type == 'Male' ? 0 : 1
   )
 
   # Assign users to teams (if applicable)
