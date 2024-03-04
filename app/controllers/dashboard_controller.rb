@@ -45,7 +45,11 @@ class DashboardController < ApplicationController
   end
 
   def fetch_comparison_records(model, id1, id2)
-    entities = [model.find(id1), model.find(id2)]
+    if model.to_s == 'Team'
+      entities = [model.find(id1).users.last, model.find(id2).users.last]
+    else
+      entities = [model.find(id1), model.find(id2)]
+    end
     fetch_comparison_ranks(entities)
   end
 
