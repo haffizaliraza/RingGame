@@ -74,4 +74,21 @@ module DashboardHelper
   def team_players
     current_user.team.users.where.not(id: current_user.id)
   end
+
+  def max_streak(game)
+    current_streak = 0
+    success_streaks = []
+    game.shorts.order(created_at: :asc).each do |short|
+      if short.result == true
+        current_streak += 1
+      else
+        success_streaks << current_streak if current_streak.positive?
+        current_streak = 0
+      end
+    end
+
+    success_streaks << current_streak if current_streak.positive?
+
+    success_streaks.max
+  end
 end

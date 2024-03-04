@@ -66,7 +66,7 @@ class DashboardController < ApplicationController
   end
 
   def fetch_game_stats
-    @games = Game.where(user_id: current_user.id).page(params[:page]).includes(:shorts)
+    @games = Game.where(user_id: current_user.id).order(created_at: :desc).page(params[:page]).includes(:shorts)
     @shorts = @games.flat_map(&:shorts)
 
     calculate_success_rates
