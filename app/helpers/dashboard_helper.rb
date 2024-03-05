@@ -40,6 +40,8 @@ module DashboardHelper
   end
 
   def calculate_success_rates(games)
+    return {} unless games.present?
+
     games.each_with_object({}) do |game, success_rates|
       total_shots = game.shorts.count
       successful_shots = game.shorts.where(result: true).count
