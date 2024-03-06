@@ -51,22 +51,24 @@ module DashboardHelper
   end
 
   def total_ranks
-    Rank.order(success_rate: :desc)
+    Rank.sorted
   end
 
   def total_team_ranks
-    Rank.joins(:user).where(users: { is_team_admin: true }).order(success_rate: :desc)
+    Rank.joins(:user).where(users: { is_team_admin: true }).sorted
   end
 
   def total_male_ranks
-    Rank.joins(:user).where(users: { gender: 'male' }).order(success_rate: :desc)
+    Rank.joins(:user).where(users: { gender: 'male' }).sorted
   end
 
   def total_female_ranks
-    Rank.joins(:user).where(users: { gender: 'female' }).order(success_rate: :desc)
+    Rank.joins(:user).where(users: { gender: 'female' }).sorted
   end
 
   def calculate_ranks(ranks)
+    return {} unless ranks.present?
+
     ranks.each_with_object({}) do |rank, success_rates|
       username = rank.user.is_team_admin ? rank.team.name : rank.user.first_name + rank.user.last_name
       success_rates[username] = rank.success_rate
@@ -75,6 +77,14 @@ module DashboardHelper
 
   def team_players
     current_user.team.users.where.not(id: current_user.id)
+  end
+
+  def player_max_streak(games)
+    streak_list = []
+    games.each do |game|
+      streak_list << max_streak(game)
+    end
+    streak_list.max
   end
 
   def max_streak(game)

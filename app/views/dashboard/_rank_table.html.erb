@@ -8,23 +8,27 @@
             <th scope="col" class="px-6 py-3">Rank</th>
             <th scope="col" class="px-6 py-3">Success Rate</th>
             <th scope="col" class="px-6 py-3">Total Games</th>
+            <th scope="col" class="px-6 py-3">Max Streak</th>
           </tr>
         </thead>
         <tbody>
-          <% if ranks.count > 0 %>
+          <% if ranks.length > 0 %>
             <% ranks.each_with_index do |rank, index| %>
               <tr class="<%= cycle('odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800', 'dark:bg-gray-800 dark:even:bg-gray-900 dark:odd:bg-gray-900 dark:even:bg-gray-800') %> border-b dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   <%= player_name(rank) %>
                 </th>
                 <td class="px-6 py-4">
-                  <%= index + 1 %>
+                  <%= params[:page].present? ? "#{index + 1 == 10 ? params[:page].to_s + '0' : params[:page].to_i - 1}#{index + 1 == 10 ? '' : index + 1}" : index + 1 %>
                 </td>
                 <td class="px-6 py-4 <%= rank.success_rate.to_i > 50 ? 'text-green-400' : 'text-red-400'%>">
                   <%= rank.success_rate %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= rank.class.to_s != "TeamRank" ? rank.user.games.count : rank.team.games.count %>
+                  <%= !rank.user.is_team_admin ? rank.user.games.count : rank.team.games.count %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= !rank.user.is_team_admin ? player_max_streak(rank.user.games) : player_max_streak(rank.team.games) %>
                 </td>
               </tr>
             <% end %>

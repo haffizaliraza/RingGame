@@ -12,6 +12,7 @@
     <% if games.any? %>
       <p class="text-gray-700 mb-2">Last Game Played on: <%= games.last.created_at %></p>
       <p class="text-gray-700 mb-2">Last Game Success Rate: <%= games.last.calculate_score&.round(2) %></p>
+      <p class="text-gray-700 mb-2">Max Streak: <%= player_max_streak(games) %></p>
     <% else %>
       <p class="text-gray-700 mb-2">No games played.</p>
     <% end %>

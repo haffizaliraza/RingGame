@@ -16,29 +16,34 @@
             Success Rate</th>
             <th scope="col" class="px-6 py-3">
             Game Played</th>
+            <th scope="col" class="px-6 py-3">
+            Max Streak</th>
           </tr>
         </thead>
         <tbody>
-          <% if ranks.count > 0 %>
-            <% ranks.each do |rank| %>
+          <% if record.count > 0 %>
+            <% record.each do |user| %>
               <tr class="<%= cycle('odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800', 'dark:bg-gray-800 dark:even:bg-gray-900 dark:odd:bg-gray-900 dark:even:bg-gray-800') %> border-b dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <%= rank.user.is_team_admin ? rank.team.name : "#{rank.user.first_name} #{rank.user.last_name}"  %>
+                  <%= user.is_team_admin ? user.team.name : "#{user.first_name} #{user.last_name}"  %>
                 </th>
                 <td class="px-6 py-4">
-                  <%= rank.user.country %>
+                  <%= user.country %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= rank.user.state %>
+                  <%= user.state %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= rank.user.gender %>
+                  <%= user.gender %>
                 </td>
-                <td class="px-6 py-4 <%= rank.success_rate.to_i > 50 ? "text-green-400" : 'text-red-400'%>">
-                  <%= rank.success_rate %>
+                <td class="px-6 py-4 <%= user.current_success_rate.to_i > 50 ? "text-green-400" : 'text-red-400'%>">
+                  <%= user.current_success_rate %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= rank.user.is_team_admin ? rank.team.games.count : rank.user.games.count  %>
+                  <%= user.is_team_admin ? user.team.games.count : user.games.count  %>
+                </td>
+                <td class="px-6 py-4">
+                  <%= player_max_streak(user.games)  %>
                 </td>
               </tr>
             <% end %>

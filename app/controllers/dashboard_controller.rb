@@ -46,7 +46,7 @@ class DashboardController < ApplicationController
 
   def fetch_comparison_records(model, id1, id2)
     if model.to_s == 'Team'
-      entities = [model.find(id1).users.last, model.find(id2).users.last]
+      entities = [model.find(id1).users, model.find(id2).users]
     else
       entities = [model.find(id1), model.find(id2)]
     end
@@ -57,12 +57,12 @@ class DashboardController < ApplicationController
     @records1, @records2 = entities
     record_ids1 = @records1.class.to_s == 'User' ? @records1 : @records1.pluck(:id)
     record_ids2 = @records2.class.to_s == 'User' ? @records2 : @records2.pluck(:id)
-    @ranks1 = Rank.where(user_id: record_ids1).last(10)
-    @ranks2 = Rank.where(user_id: record_ids2).last(10)
+    @ranks1 = Rank.sorted.where(user_id: record_ids1).last(10)
+    @ranks2 = Rank.sorted.where(user_id: record_ids2).last(10)
   end
 
   def display_ranks(rank_model)
-    @ranks = rank_model.page(params[:page]).order(success_rate: :desc)
+    @ranks = rank_model.sorted.page(params[:page])
   end
 
   def fetch_game_stats

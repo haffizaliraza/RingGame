@@ -7,7 +7,7 @@ teams = []
 end
 
 # Create 30 users
-30.times do |i|
+50.times do |i|
   state = states.sample
   country = countries.sample
 
@@ -26,6 +26,10 @@ end
   # Assign users to teams (if applicable)
   if i < teams.length
     user.update(team: teams[i], is_team_admin: true)
+  end
+
+  if i > teams.length && i < 30
+    user.update(team: teams[i], is_team_admin: false)
   end
 end
 
@@ -99,9 +103,9 @@ User.where.not(team_id: nil).each_with_index do |user, index|
 end
 
 User.all.each do |user|
-  next if user.games.length < 1
+  next if user.games.length < 1 && user.team.blank?
   user_rank = {}
-  if user.is_team_admin
+  if user.is_team_admin || user.team.present?
     user_rank = Rank.find_or_initialize_by(user_id: user.id, team_id: user.team.id)
   else
     user_rank = Rank.find_or_initialize_by(user_id: user.id)
