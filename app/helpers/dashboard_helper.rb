@@ -103,4 +103,32 @@ module DashboardHelper
 
     success_streaks.max
   end
+
+  def team_stats(users)
+    max_team_streak = []
+    users.each do |user|
+      if user.games.length > 0
+        max_team_streak << player_max_streak(user.games)
+      else
+        0
+      end
+    end
+    max_team_streak.max
+  end
+
+  def team_games(users)
+    max_games = 0
+    users.each do |user|
+      max_games += user.games.count
+    end
+    max_games
+  end
+
+  def team_success_rate(users)
+    success_rate = 0.0
+    users.each do |user|
+      success_rate += user.current_success_rate
+    end
+    (success_rate / users.count).round(2)
+  end
 end
