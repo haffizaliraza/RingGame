@@ -3,9 +3,12 @@
   <div class='flex justify-between'>
     <%= render 'team_stats', heading: 'Max Streak', count: team_stats(record) %>
     <%= render 'team_stats', heading: 'Total Games', count: team_games(record) %>
-    <%= render 'team_stats', heading: 'Averge Success Rate', count: team_success_rate(record) %>
+    <%= render 'team_stats', heading: 'Total Success Rate', count: team_success_rate(record) %>
   </div>
   <div class="relative overflow-x-auto my-2 shadow-md sm:rounded-lg border top-2.5">
+    <% if team_success_rate(team1) > team_success_rate(team2) %>
+      <h1 class='py-2 text-center text-green-400 font-semibold underline'>Winner</h1>
+    <% end %>
     <table class="w-full striped text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -30,10 +33,10 @@
             <% record.each do |user| %>
               <tr class="<%= cycle('odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800', 'dark:bg-gray-800 dark:even:bg-gray-900 dark:odd:bg-gray-900 dark:even:bg-gray-800') %> border-b dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <%= user.is_team_admin ? user.team.name : "#{user.first_name} #{user.last_name}"  %>
+                  <%= user.is_team_admin ? user.team.name.split(' ')[0] + ' ...' : "#{user.first_name} ..."  %>
                 </th>
                 <td class="px-6 py-4">
-                  <%= user.country %>
+                  <%= user.country.split(' ')[0] + '...' %>
                 </td>
                 <td class="px-6 py-4">
                   <%= user.state %>

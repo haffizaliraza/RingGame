@@ -9,8 +9,7 @@ namespace :rankings do
       else
         user_rank = Rank.find_or_initialize_by(user_id: user.id)
       end
-      success_rate = user.current_success_rate
-      user_rank.success_rate = success_rate
+      user_rank.success_rate = user.current_success_rate
       user_rank.save
     end
   end

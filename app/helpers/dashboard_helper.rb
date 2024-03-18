@@ -129,6 +129,6 @@ module DashboardHelper
     users.each do |user|
       success_rate += user.current_success_rate
     end
-    (success_rate / users.count).round(2)
+    (success_rate).round(2)
   end
 end

@@ -78,10 +78,10 @@
       <div class='w-full flex'>
         <!-- Comparison -->
         <div class="sm:w-2/4 mb-10 px-4">
-          <%= render partial: 'table_detail', locals: { record: @records1, ranks: @ranks1 } %>
+          <%= render partial: 'table_detail', locals: { team1: @records1, team2: @records2, record: @records1, ranks: @ranks1 } %>
         </div>
         <div class="sm:w-2/4 mb-10 px-4">
-          <%= render partial: 'table_detail', locals: { record: @records2, ranks: @ranks2 } %>
+          <%= render partial: 'table_detail', locals: { team1: @records2, team2: @records1, record: @records2, ranks: @ranks2 } %>
         </div>
       </div>
     <% end %>
