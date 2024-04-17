@@ -19,10 +19,20 @@
     <%= render 'card_stats', heading: 'Total Users', count: total_users %>
   </div>
 
-  <div class='w-full text-center'>
-    <!-- Ranking -->
-    <div class="sm:w-full mb-10 px-4">
-      <%= render 'rank_table', heading: "Ranks", ranks: @ranks  %>
+  <div class='text-center'>
+    <div class='flex'>
+      <div class='w-1/2 text-center'>
+        <!-- Ranking -->
+        <div class="sm:w-full mb-10 px-4">
+          <%= render 'rank_table', heading: "Ranks on Score", ranks: @ranks  %>
+        </div>  
+      </div>
+      <div class='w-1/2 text-center'>
+        <!-- Ranking -->
+        <div class="sm:w-full mb-10 px-4">
+          <%= render 'rank_table', heading: "Ranks on Max Streak", ranks: @ranks_with_streak  %>
+        </div>
+      </div>
     </div>
     <%= paginate @ranks %>
   </div>

@@ -112,5 +112,6 @@ User.all.each do |user|
   end
   success_rate = user.current_success_rate
   user_rank.success_rate = success_rate
+  user_rank.max_streak = user.current_max_streak
   user_rank.save
 end

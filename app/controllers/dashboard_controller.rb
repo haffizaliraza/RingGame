@@ -63,6 +63,7 @@ class DashboardController < ApplicationController
 
   def display_ranks(rank_model)
     @ranks = rank_model.sorted.page(params[:page])
+    @ranks_with_streak = rank_model.order(max_streak: :desc).order(success_rate: :desc).page(params[:page])
   end
 
   def fetch_game_stats
