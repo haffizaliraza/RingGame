@@ -37,6 +37,12 @@ class Game < ApplicationRecord
     (successful_shots.to_f / total_shots) * 100
   end
 
+  def short_true
+    return 0 if shorts.empty?
+
+    successful_shots = shorts.where(result: true).count
+  end
+
   private
 
   def update_rankings
