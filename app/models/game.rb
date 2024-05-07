@@ -1,6 +1,6 @@
-Rails.application.load_tasks
-
 class Game < ApplicationRecord
+  include UpdateRank
+
   belongs_to :user
   belongs_to :team, optional: true
   enum status: [:initiated, :in_progress, :completed, :hold]
@@ -47,7 +47,9 @@ class Game < ApplicationRecord
 
   def update_rankings
     if self.status == 'completed'
-      Rake::Task['rankings:update'].invoke
+      re_index_rank
+      update_success_rate_table
+      update_max_streak_table
     end
   end
 
@@ -58,5 +60,29 @@ class Game < ApplicationRecord
     if existing_games&.exists? || existing_team_games&.exists?
       errors.add(:base, "User already has a game in progress or initiated.")
     end
+  end
+
+  def update_success_rate_table
+    broadcast_update_to(
+      :ranks,
+      target: "ranks_on_success_rate",
+      partial: "dashboard/rank_table",
+      locals: {
+        heading: "Ranks on Score",
+        ranks: Rank.order(success_rate: :desc)
+      }
+    )
+  end
+
+  def update_max_streak_table
+    broadcast_update_to(
+      :ranks_with_streak,
+      target: "ranks_with_streak",
+      partial: "dashboard/rank_table",
+      locals: {
+        heading: "Ranks on Max Streak",
+        ranks: Rank.order(max_streak: :desc)
+      }
+    )
   end
 end

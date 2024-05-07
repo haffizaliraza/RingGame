@@ -6,12 +6,6 @@ class Team < ApplicationRecord
 
 
     def current_success_rate
-        score = 0.0
-        games.each do |game| 
-            score += game.calculate_score
-        end
-        return score if score < 1
-
-        (score / games.count).round(2)
+        ranks.last.success_rate
     end
 end

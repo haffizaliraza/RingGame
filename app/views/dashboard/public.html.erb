@@ -24,13 +24,19 @@
       <div class='w-1/2 text-center'>
         <!-- Ranking -->
         <div class="sm:w-full mb-10 px-4">
-          <%= render 'rank_table', heading: "Ranks on Score", ranks: @ranks  %>
+          <%= turbo_stream_from :ranks %>
+          <%= turbo_frame_tag "ranks_on_success_rate" do %>
+            <%= render 'rank_table', heading: "Ranks on Score", ranks: @ranks  %>
+          <% end %>
         </div>  
       </div>
       <div class='w-1/2 text-center'>
         <!-- Ranking -->
         <div class="sm:w-full mb-10 px-4">
-          <%= render 'rank_table', heading: "Ranks on Max Streak", ranks: @ranks_with_streak  %>
+          <%= turbo_stream_from :ranks_with_streak %>
+          <%= turbo_frame_tag "ranks_on_max_streak" do %>
+            <%= render 'rank_table', heading: "Ranks on Max Streak", ranks: @ranks_with_streak  %>
+          <% end %>
         </div>
       </div>
     </div>

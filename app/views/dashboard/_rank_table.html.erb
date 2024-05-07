@@ -28,7 +28,7 @@
                   <%= !rank.user.is_team_admin ? rank.user.games.count : rank.team.games.count %>
                 </td>
                 <td class="px-6 py-4">
-                  <%= !rank.user.is_team_admin ? player_max_streak(rank.user.games) : player_max_streak(rank.team.games) %>
+                  <%= rank.max_streak %>
                 </td>
               </tr>
             <% end %>

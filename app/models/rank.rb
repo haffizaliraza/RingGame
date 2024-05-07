@@ -1,6 +1,11 @@
 class Rank < ApplicationRecord
+  GAME_WEIGHT = 0.7
+  SCORE_WEIGHT = 0.3
+
   belongs_to :user
   belongs_to :team, optional: true
+
+  validates :user_id, uniqueness: true
 
   def self.sorted
     select('ranks.*, COUNT(games.id) AS games_count')

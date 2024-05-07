@@ -84,7 +84,7 @@ module DashboardHelper
     games.each do |game|
       streak_list << max_streak(game)
     end
-    streak_list.max
+    streak_list.compact.max
   end
 
   def max_streak(game)
@@ -101,7 +101,7 @@ module DashboardHelper
 
     success_streaks << current_streak if current_streak.positive?
 
-    success_streaks.max
+    success_streaks.compact.max
   end
 
   def team_stats(users)
@@ -113,7 +113,7 @@ module DashboardHelper
         0
       end
     end
-    max_team_streak.max
+    max_team_streak.compact.max
   end
 
   def team_games(users)
@@ -129,6 +129,6 @@ module DashboardHelper
     users.each do |user|
       success_rate += user.current_success_rate
     end
-    (success_rate).round(2)
+    (success_rate / users.size).round(2)
   end
 end
